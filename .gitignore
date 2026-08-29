@@ -1,0 +1,9 @@
+.env
+docs/
+data/master/
+data/processed/
+data/quality_checks/
+data/raw/
+data/sample/
+__pycache__/
+*.pyc
