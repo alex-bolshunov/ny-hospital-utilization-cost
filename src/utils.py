@@ -1,6 +1,19 @@
 from pathlib import Path
 
-def remove_files(path:Path, ext:str = "") -> list[Path]:
+def get_files_by_extension(folder_path: Path, ext: str) -> list[Path]:
+    """Return files in a folder that match the given extension."""
+
+    if not ext:
+        raise ValueError(f"Extension must be provided.")
+    
+    return [
+        file_path
+        for file_path in folder_path.iterdir()
+        if file_path.is_file() and file_path.suffix[1:] == ext
+    ]
+
+
+def remove_files(path:Path, ext:str = "", is_missing_ok: bool = True) -> list[Path]:
     """
     Remove a single file or all files with a given extension from a folder.
 
@@ -11,6 +24,8 @@ def remove_files(path:Path, ext:str = "") -> list[Path]:
     ext : str, optional
         File extension to filter by, with or without a leading dot.
         Required when `path` is a folder.
+    missing_ok : bool, optional
+        If True, return an empty list when the path does not exist.
 
     Returns
     -------
@@ -22,17 +37,13 @@ def remove_files(path:Path, ext:str = "") -> list[Path]:
     ext = ext.lstrip(".")
 
     if not (is_file or is_folder):
+        if is_missing_ok:
+            return []
+
         raise ValueError(f"{path} doesn't exists")
     
-    if is_folder:
-        if not ext:
-            raise ValueError(f"Extension must be provided when removing multiple files from a folder.")
-            
-        files_to_remove = [
-            file_path
-            for file_path in path.iterdir()
-            if file_path.is_file() and file_path.suffix[1:] == ext
-        ]
+    if is_folder:            
+        files_to_remove = get_files_by_extension(path, ext)
 
         for file_path in files_to_remove:
             file_path.unlink()

@@ -1,7 +1,10 @@
 import pandas as pd
 import pyarrow.parquet as pq
-from config import RAW_DIR, EXT
-
+from utils import get_files_by_extension
+from config import (
+    RAW_DIR, 
+    EXT
+    )
 
 def get_sample_df(
     sample_size: int = 200_000,
@@ -30,18 +33,10 @@ def get_sample_df(
     if sample_size <= 0:
         raise ValueError("sample_size must be greater than 0.")
 
-    raw_dir = RAW_DIR
-    # file_extension = EXT if str(EXT).startswith(".") else f".{EXT}"
-    file_extension = f".{EXT}"
-
-    parquet_files = sorted(
-        file_path
-        for file_path in raw_dir.iterdir()
-        if file_path.is_file() and file_path.suffix == file_extension
-    )
+    parquet_files = get_files_by_extension(RAW_DIR, EXT)
 
     if not parquet_files:
-        raise ValueError(f"No {file_extension} files found in {raw_dir}.")
+        raise ValueError(f"No {EXT} files found in {RAW_DIR}.")
 
     total_num_rows = 0
 
