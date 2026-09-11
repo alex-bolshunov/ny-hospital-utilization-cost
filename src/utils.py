@@ -1,7 +1,26 @@
 from pathlib import Path
+from config import (
+    RAW_DIR,
+    PROCESSED_DIR,
+    SAMPLE_DIR,
+    MASTER_DIR,
+    QUALITY_DIR
+)
+
+def create_project_folders() -> None:
+    """
+    Create project folders if they do not exist.
+    """
+    folders = (RAW_DIR, PROCESSED_DIR, SAMPLE_DIR, MASTER_DIR,QUALITY_DIR)
+
+    for folder in folders:
+        folder.mkdir(parents=True, exist_ok=True)
+
 
 def get_files_by_extension(folder_path: Path, ext: str) -> list[Path]:
-    """Return files in a folder that match the given extension."""
+    """
+    Return files in a folder that match the given extension.
+    """
 
     if not ext:
         raise ValueError(f"Extension must be provided.")

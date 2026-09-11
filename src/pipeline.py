@@ -6,6 +6,7 @@ from transform import (
     get_duplicate_raws
     )
 from utils import (
+    create_project_folders,
     remove_files,
     get_files_by_extension
     )
@@ -30,17 +31,17 @@ from config import (
     DUPLICATES_FILE_PATH
     )
 
-#WRITE LOGIC TO CREATE FOLDERS IF THEY DO NOT EXIST
-#WRITE README 
-#ADD TESTS 
-
 def main():
+
+    #create folders
+    create_project_folders()
 
     #extract files
     if RUN_EXTRACTION:
         print("\nRunning extract block.")
 
         removed_raw_files = remove_files(RAW_DIR, EXT)
+
         if removed_raw_files:
             print(f"{len(removed_raw_files)} old raw files were deleted.")
 

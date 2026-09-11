@@ -36,14 +36,6 @@ def query_sparcs(
     -------
     pd.DataFrame
         A DataFrame containing the records returned for the requested page.
-
-    Raises
-    ------
-    requests.HTTPError
-        If the API request fails with an HTTP error status.
-
-     ValueError
-        If the API response structure is not recognized.
     """
 
     headers = {
@@ -89,9 +81,6 @@ def extract_all_rows(
 
     """
     Extract all rows from the SPARCS 2024 dataset page by page.
-
-    This function does not save files.
-    It yields one page at a time so pipeline.py can decide what to do with each page.
 
     Parameters
     ----------

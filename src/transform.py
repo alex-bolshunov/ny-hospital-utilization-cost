@@ -20,7 +20,7 @@ def clean_data(
     #check for expected values
     for col in EXPECTED_VALUES:
         actual_values = set(df[col].dropna().unique())
-        expected_values = set(EXPECTED_VALUES[col])
+        expected_values = EXPECTED_VALUES[col]
 
         unexpected_values = actual_values - expected_values
 
@@ -40,6 +40,7 @@ def clean_data(
     df[cols] = df[cols].astype("Int64")
 
     return df
+
 
 def get_duplicate_raws(
     df: pd.DataFrame,
