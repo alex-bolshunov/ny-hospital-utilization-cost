@@ -113,6 +113,19 @@ EXPECTED_VALUES = {
     },
 }
 
+MORTALITY_RISK_RANKS = {
+    "Undetermined":0,
+    "Minor":1,
+    "Moderate":2,
+    "Major":3,
+    "Extreme":4
+}
+
+ED_SERVICES_MAPPING = {
+    "N": 0,
+    "Y": 1
+}
+
 TEXT_COLUMNS = [
     "health_service_area",
     "hospital_county",
